@@ -1,0 +1,580 @@
+diff --git a/node_modules/@uniswap/universal-router/artifacts/contracts/UniversalRouter.sol/UniversalRouter.json b/node_modules/@uniswap/universal-router/artifacts/contracts/UniversalRouter.sol/UniversalRouter.json
+index 99e6cf1..034ed09 100644
+--- a/node_modules/@uniswap/universal-router/artifacts/contracts/UniversalRouter.sol/UniversalRouter.json
++++ b/node_modules/@uniswap/universal-router/artifacts/contracts/UniversalRouter.sol/UniversalRouter.json
+@@ -489,7 +489,7 @@
+           "type": "bytes"
+         }
+       ],
+-      "name": "uniswapV3SwapCallback",
++      "name": "bambaswapV3SwapCallback",
+       "outputs": [],
+       "stateMutability": "nonpayable",
+       "type": "function"
+diff --git a/node_modules/@uniswap/universal-router/artifacts/contracts/modules/uniswap/v3/V3SwapRouter.sol/V3SwapRouter.json b/node_modules/@uniswap/universal-router/artifacts/contracts/modules/uniswap/v3/V3SwapRouter.sol/V3SwapRouter.json
+index d9372c5..3b361bf 100644
+--- a/node_modules/@uniswap/universal-router/artifacts/contracts/modules/uniswap/v3/V3SwapRouter.sol/V3SwapRouter.json
++++ b/node_modules/@uniswap/universal-router/artifacts/contracts/modules/uniswap/v3/V3SwapRouter.sol/V3SwapRouter.json
+@@ -81,7 +81,7 @@
+           "type": "bytes"
+         }
+       ],
+-      "name": "uniswapV3SwapCallback",
++      "name": "bambaswapV3SwapCallback",
+       "outputs": [],
+       "stateMutability": "nonpayable",
+       "type": "function"
+diff --git a/node_modules/@uniswap/universal-router/contracts/base/RouterImmutables.sol b/node_modules/@uniswap/universal-router/contracts/base/RouterImmutables.sol
+index 8a94193..4cc1cb4 100644
+--- a/node_modules/@uniswap/universal-router/contracts/base/RouterImmutables.sol
++++ b/node_modules/@uniswap/universal-router/contracts/base/RouterImmutables.sol
+@@ -86,10 +86,10 @@ contract RouterImmutables {
+     bytes32 internal immutable UNISWAP_V2_PAIR_INIT_CODE_HASH;
+ 
+     /// @dev The address of UniswapV3Factory
+-    address internal immutable UNISWAP_V3_FACTORY;
++    address internal immutable BAMBASWAP_V3_FACTORY;
+ 
+     /// @dev The UniswapV3Pool initcodehash
+-    bytes32 internal immutable UNISWAP_V3_POOL_INIT_CODE_HASH;
++    bytes32 internal immutable BAMBASWAP_V3_POOL_INIT_CODE_HASH;
+ 
+     enum Spenders {
+         OSConduit,
+@@ -115,7 +115,7 @@ contract RouterImmutables {
+         ROUTER_REWARDS_DISTRIBUTOR = params.routerRewardsDistributor;
+         UNISWAP_V2_FACTORY = params.v2Factory;
+         UNISWAP_V2_PAIR_INIT_CODE_HASH = params.pairInitCodeHash;
+-        UNISWAP_V3_FACTORY = params.v3Factory;
+-        UNISWAP_V3_POOL_INIT_CODE_HASH = params.poolInitCodeHash;
++        BAMBASWAP_V3_FACTORY = params.v3Factory;
++        BAMBASWAP_V3_POOL_INIT_CODE_HASH = params.poolInitCodeHash;
+     }
+ }
+diff --git a/node_modules/@uniswap/universal-router/contracts/modules/uniswap/v3/V3SwapRouter.sol b/node_modules/@uniswap/universal-router/contracts/modules/uniswap/v3/V3SwapRouter.sol
+index 44966bd..54eef1e 100644
+--- a/node_modules/@uniswap/universal-router/contracts/modules/uniswap/v3/V3SwapRouter.sol
++++ b/node_modules/@uniswap/universal-router/contracts/modules/uniswap/v3/V3SwapRouter.sol
+@@ -37,7 +37,7 @@ abstract contract V3SwapRouter is RouterImmutables, Permit2Payments, IUniswapV3S
+     /// @dev The maximum value that can be returned from #getSqrtRatioAtTick. Equivalent to getSqrtRatioAtTick(MAX_TICK)
+     uint160 internal constant MAX_SQRT_RATIO = 1461446703485210103287273052203988822378723970342;
+ 
+-    function uniswapV3SwapCallback(int256 amount0Delta, int256 amount1Delta, bytes calldata data) external {
++    function bambaswapV3SwapCallback(int256 amount0Delta, int256 amount1Delta, bytes calldata data) external {
+         if (amount0Delta <= 0 && amount1Delta <= 0) revert V3InvalidSwap(); // swaps entirely within 0-liquidity regions are not supported
+         (, address payer) = abi.decode(data, (bytes, address));
+         bytes calldata path = data.toBytes(0);
+@@ -165,9 +165,9 @@ abstract contract V3SwapRouter is RouterImmutables, Permit2Payments, IUniswapV3S
+                     keccak256(
+                         abi.encodePacked(
+                             hex'ff',
+-                            UNISWAP_V3_FACTORY,
++                            BAMBASWAP_V3_FACTORY,
+                             keccak256(abi.encode(tokenA, tokenB, fee)),
+-                            UNISWAP_V3_POOL_INIT_CODE_HASH
++                            BAMBASWAP_V3_POOL_INIT_CODE_HASH
+                         )
+                     )
+                 )
+diff --git a/node_modules/@uniswap/universal-router/typechain/Dispatcher.d.ts b/node_modules/@uniswap/universal-router/typechain/Dispatcher.d.ts
+index c610a7f..38c7d44 100644
+--- a/node_modules/@uniswap/universal-router/typechain/Dispatcher.d.ts
++++ b/node_modules/@uniswap/universal-router/typechain/Dispatcher.d.ts
+@@ -28,7 +28,7 @@ interface DispatcherInterface extends ethers.utils.Interface {
+     "onERC1155Received(address,address,uint256,uint256,bytes)": FunctionFragment;
+     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
+     "supportsInterface(bytes4)": FunctionFragment;
+-    "uniswapV3SwapCallback(int256,int256,bytes)": FunctionFragment;
++    "bambaswapV3SwapCallback(int256,int256,bytes)": FunctionFragment;
+   };
+ 
+   encodeFunctionData(
+@@ -52,7 +52,7 @@ interface DispatcherInterface extends ethers.utils.Interface {
+     values: [BytesLike]
+   ): string;
+   encodeFunctionData(
+-    functionFragment: "uniswapV3SwapCallback",
++    functionFragment: "bambaswapV3SwapCallback",
+     values: [BigNumberish, BigNumberish, BytesLike]
+   ): string;
+ 
+@@ -74,7 +74,7 @@ interface DispatcherInterface extends ethers.utils.Interface {
+     data: BytesLike
+   ): Result;
+   decodeFunctionResult(
+-    functionFragment: "uniswapV3SwapCallback",
++    functionFragment: "bambaswapV3SwapCallback",
+     data: BytesLike
+   ): Result;
+ 
+@@ -185,14 +185,14 @@ export class Dispatcher extends Contract {
+       0: boolean;
+     }>;
+ 
+-    uniswapV3SwapCallback(
++    bambaswapV3SwapCallback(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+       overrides?: Overrides
+     ): Promise<ContractTransaction>;
+ 
+-    "uniswapV3SwapCallback(int256,int256,bytes)"(
++    "bambaswapV3SwapCallback(int256,int256,bytes)"(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+@@ -274,14 +274,14 @@ export class Dispatcher extends Contract {
+     overrides?: CallOverrides
+   ): Promise<boolean>;
+ 
+-  uniswapV3SwapCallback(
++  bambaswapV3SwapCallback(
+     amount0Delta: BigNumberish,
+     amount1Delta: BigNumberish,
+     data: BytesLike,
+     overrides?: Overrides
+   ): Promise<ContractTransaction>;
+ 
+-  "uniswapV3SwapCallback(int256,int256,bytes)"(
++  "bambaswapV3SwapCallback(int256,int256,bytes)"(
+     amount0Delta: BigNumberish,
+     amount1Delta: BigNumberish,
+     data: BytesLike,
+@@ -363,14 +363,14 @@ export class Dispatcher extends Contract {
+       overrides?: CallOverrides
+     ): Promise<boolean>;
+ 
+-    uniswapV3SwapCallback(
++    bambaswapV3SwapCallback(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+       overrides?: CallOverrides
+     ): Promise<void>;
+ 
+-    "uniswapV3SwapCallback(int256,int256,bytes)"(
++    "bambaswapV3SwapCallback(int256,int256,bytes)"(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+@@ -455,14 +455,14 @@ export class Dispatcher extends Contract {
+       overrides?: CallOverrides
+     ): Promise<BigNumber>;
+ 
+-    uniswapV3SwapCallback(
++    bambaswapV3SwapCallback(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+       overrides?: Overrides
+     ): Promise<BigNumber>;
+ 
+-    "uniswapV3SwapCallback(int256,int256,bytes)"(
++    "bambaswapV3SwapCallback(int256,int256,bytes)"(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+@@ -545,14 +545,14 @@ export class Dispatcher extends Contract {
+       overrides?: CallOverrides
+     ): Promise<PopulatedTransaction>;
+ 
+-    uniswapV3SwapCallback(
++    bambaswapV3SwapCallback(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+       overrides?: Overrides
+     ): Promise<PopulatedTransaction>;
+ 
+-    "uniswapV3SwapCallback(int256,int256,bytes)"(
++    "bambaswapV3SwapCallback(int256,int256,bytes)"(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+diff --git a/node_modules/@uniswap/universal-router/typechain/IUniswapV3SwapCallback.d.ts b/node_modules/@uniswap/universal-router/typechain/IUniswapV3SwapCallback.d.ts
+index 9517bcf..96163e8 100644
+--- a/node_modules/@uniswap/universal-router/typechain/IUniswapV3SwapCallback.d.ts
++++ b/node_modules/@uniswap/universal-router/typechain/IUniswapV3SwapCallback.d.ts
+@@ -22,16 +22,16 @@ import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+ 
+ interface IUniswapV3SwapCallbackInterface extends ethers.utils.Interface {
+   functions: {
+-    "uniswapV3SwapCallback(int256,int256,bytes)": FunctionFragment;
++    "bambaswapV3SwapCallback(int256,int256,bytes)": FunctionFragment;
+   };
+ 
+   encodeFunctionData(
+-    functionFragment: "uniswapV3SwapCallback",
++    functionFragment: "bambaswapV3SwapCallback",
+     values: [BigNumberish, BigNumberish, BytesLike]
+   ): string;
+ 
+   decodeFunctionResult(
+-    functionFragment: "uniswapV3SwapCallback",
++    functionFragment: "bambaswapV3SwapCallback",
+     data: BytesLike
+   ): Result;
+ 
+@@ -52,14 +52,14 @@ export class IUniswapV3SwapCallback extends Contract {
+   interface: IUniswapV3SwapCallbackInterface;
+ 
+   functions: {
+-    uniswapV3SwapCallback(
++    bambaswapV3SwapCallback(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+       overrides?: Overrides
+     ): Promise<ContractTransaction>;
+ 
+-    "uniswapV3SwapCallback(int256,int256,bytes)"(
++    "bambaswapV3SwapCallback(int256,int256,bytes)"(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+@@ -67,14 +67,14 @@ export class IUniswapV3SwapCallback extends Contract {
+     ): Promise<ContractTransaction>;
+   };
+ 
+-  uniswapV3SwapCallback(
++  bambaswapV3SwapCallback(
+     amount0Delta: BigNumberish,
+     amount1Delta: BigNumberish,
+     data: BytesLike,
+     overrides?: Overrides
+   ): Promise<ContractTransaction>;
+ 
+-  "uniswapV3SwapCallback(int256,int256,bytes)"(
++  "bambaswapV3SwapCallback(int256,int256,bytes)"(
+     amount0Delta: BigNumberish,
+     amount1Delta: BigNumberish,
+     data: BytesLike,
+@@ -82,14 +82,14 @@ export class IUniswapV3SwapCallback extends Contract {
+   ): Promise<ContractTransaction>;
+ 
+   callStatic: {
+-    uniswapV3SwapCallback(
++    bambaswapV3SwapCallback(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+       overrides?: CallOverrides
+     ): Promise<void>;
+ 
+-    "uniswapV3SwapCallback(int256,int256,bytes)"(
++    "bambaswapV3SwapCallback(int256,int256,bytes)"(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+@@ -100,14 +100,14 @@ export class IUniswapV3SwapCallback extends Contract {
+   filters: {};
+ 
+   estimateGas: {
+-    uniswapV3SwapCallback(
++    bambaswapV3SwapCallback(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+       overrides?: Overrides
+     ): Promise<BigNumber>;
+ 
+-    "uniswapV3SwapCallback(int256,int256,bytes)"(
++    "bambaswapV3SwapCallback(int256,int256,bytes)"(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+@@ -116,14 +116,14 @@ export class IUniswapV3SwapCallback extends Contract {
+   };
+ 
+   populateTransaction: {
+-    uniswapV3SwapCallback(
++    bambaswapV3SwapCallback(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+       overrides?: Overrides
+     ): Promise<PopulatedTransaction>;
+ 
+-    "uniswapV3SwapCallback(int256,int256,bytes)"(
++    "bambaswapV3SwapCallback(int256,int256,bytes)"(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+diff --git a/node_modules/@uniswap/universal-router/typechain/UniversalRouter.d.ts b/node_modules/@uniswap/universal-router/typechain/UniversalRouter.d.ts
+index 8bc8b02..94ff787 100644
+--- a/node_modules/@uniswap/universal-router/typechain/UniversalRouter.d.ts
++++ b/node_modules/@uniswap/universal-router/typechain/UniversalRouter.d.ts
+@@ -29,7 +29,7 @@ interface UniversalRouterInterface extends ethers.utils.Interface {
+     "onERC1155Received(address,address,uint256,uint256,bytes)": FunctionFragment;
+     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
+     "supportsInterface(bytes4)": FunctionFragment;
+-    "uniswapV3SwapCallback(int256,int256,bytes)": FunctionFragment;
++    "bambaswapV3SwapCallback(int256,int256,bytes)": FunctionFragment;
+   };
+ 
+   encodeFunctionData(
+@@ -57,7 +57,7 @@ interface UniversalRouterInterface extends ethers.utils.Interface {
+     values: [BytesLike]
+   ): string;
+   encodeFunctionData(
+-    functionFragment: "uniswapV3SwapCallback",
++    functionFragment: "bambaswapV3SwapCallback",
+     values: [BigNumberish, BigNumberish, BytesLike]
+   ): string;
+ 
+@@ -83,7 +83,7 @@ interface UniversalRouterInterface extends ethers.utils.Interface {
+     data: BytesLike
+   ): Result;
+   decodeFunctionResult(
+-    functionFragment: "uniswapV3SwapCallback",
++    functionFragment: "bambaswapV3SwapCallback",
+     data: BytesLike
+   ): Result;
+ 
+@@ -209,14 +209,14 @@ export class UniversalRouter extends Contract {
+       0: boolean;
+     }>;
+ 
+-    uniswapV3SwapCallback(
++    bambaswapV3SwapCallback(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+       overrides?: Overrides
+     ): Promise<ContractTransaction>;
+ 
+-    "uniswapV3SwapCallback(int256,int256,bytes)"(
++    "bambaswapV3SwapCallback(int256,int256,bytes)"(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+@@ -309,14 +309,14 @@ export class UniversalRouter extends Contract {
+     overrides?: CallOverrides
+   ): Promise<boolean>;
+ 
+-  uniswapV3SwapCallback(
++  bambaswapV3SwapCallback(
+     amount0Delta: BigNumberish,
+     amount1Delta: BigNumberish,
+     data: BytesLike,
+     overrides?: Overrides
+   ): Promise<ContractTransaction>;
+ 
+-  "uniswapV3SwapCallback(int256,int256,bytes)"(
++  "bambaswapV3SwapCallback(int256,int256,bytes)"(
+     amount0Delta: BigNumberish,
+     amount1Delta: BigNumberish,
+     data: BytesLike,
+@@ -409,14 +409,14 @@ export class UniversalRouter extends Contract {
+       overrides?: CallOverrides
+     ): Promise<boolean>;
+ 
+-    uniswapV3SwapCallback(
++    bambaswapV3SwapCallback(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+       overrides?: CallOverrides
+     ): Promise<void>;
+ 
+-    "uniswapV3SwapCallback(int256,int256,bytes)"(
++    "bambaswapV3SwapCallback(int256,int256,bytes)"(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+@@ -514,14 +514,14 @@ export class UniversalRouter extends Contract {
+       overrides?: CallOverrides
+     ): Promise<BigNumber>;
+ 
+-    uniswapV3SwapCallback(
++    bambaswapV3SwapCallback(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+       overrides?: Overrides
+     ): Promise<BigNumber>;
+ 
+-    "uniswapV3SwapCallback(int256,int256,bytes)"(
++    "bambaswapV3SwapCallback(int256,int256,bytes)"(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+@@ -615,14 +615,14 @@ export class UniversalRouter extends Contract {
+       overrides?: CallOverrides
+     ): Promise<PopulatedTransaction>;
+ 
+-    uniswapV3SwapCallback(
++    bambaswapV3SwapCallback(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+       overrides?: Overrides
+     ): Promise<PopulatedTransaction>;
+ 
+-    "uniswapV3SwapCallback(int256,int256,bytes)"(
++    "bambaswapV3SwapCallback(int256,int256,bytes)"(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+diff --git a/node_modules/@uniswap/universal-router/typechain/V3SwapRouter.d.ts b/node_modules/@uniswap/universal-router/typechain/V3SwapRouter.d.ts
+index ab85b09..21cf3d9 100644
+--- a/node_modules/@uniswap/universal-router/typechain/V3SwapRouter.d.ts
++++ b/node_modules/@uniswap/universal-router/typechain/V3SwapRouter.d.ts
+@@ -22,16 +22,16 @@ import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+ 
+ interface V3SwapRouterInterface extends ethers.utils.Interface {
+   functions: {
+-    "uniswapV3SwapCallback(int256,int256,bytes)": FunctionFragment;
++    "bambaswapV3SwapCallback(int256,int256,bytes)": FunctionFragment;
+   };
+ 
+   encodeFunctionData(
+-    functionFragment: "uniswapV3SwapCallback",
++    functionFragment: "bambaswapV3SwapCallback",
+     values: [BigNumberish, BigNumberish, BytesLike]
+   ): string;
+ 
+   decodeFunctionResult(
+-    functionFragment: "uniswapV3SwapCallback",
++    functionFragment: "bambaswapV3SwapCallback",
+     data: BytesLike
+   ): Result;
+ 
+@@ -52,14 +52,14 @@ export class V3SwapRouter extends Contract {
+   interface: V3SwapRouterInterface;
+ 
+   functions: {
+-    uniswapV3SwapCallback(
++    bambaswapV3SwapCallback(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+       overrides?: Overrides
+     ): Promise<ContractTransaction>;
+ 
+-    "uniswapV3SwapCallback(int256,int256,bytes)"(
++    "bambaswapV3SwapCallback(int256,int256,bytes)"(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+@@ -67,14 +67,14 @@ export class V3SwapRouter extends Contract {
+     ): Promise<ContractTransaction>;
+   };
+ 
+-  uniswapV3SwapCallback(
++  bambaswapV3SwapCallback(
+     amount0Delta: BigNumberish,
+     amount1Delta: BigNumberish,
+     data: BytesLike,
+     overrides?: Overrides
+   ): Promise<ContractTransaction>;
+ 
+-  "uniswapV3SwapCallback(int256,int256,bytes)"(
++  "bambaswapV3SwapCallback(int256,int256,bytes)"(
+     amount0Delta: BigNumberish,
+     amount1Delta: BigNumberish,
+     data: BytesLike,
+@@ -82,14 +82,14 @@ export class V3SwapRouter extends Contract {
+   ): Promise<ContractTransaction>;
+ 
+   callStatic: {
+-    uniswapV3SwapCallback(
++    bambaswapV3SwapCallback(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+       overrides?: CallOverrides
+     ): Promise<void>;
+ 
+-    "uniswapV3SwapCallback(int256,int256,bytes)"(
++    "bambaswapV3SwapCallback(int256,int256,bytes)"(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+@@ -100,14 +100,14 @@ export class V3SwapRouter extends Contract {
+   filters: {};
+ 
+   estimateGas: {
+-    uniswapV3SwapCallback(
++    bambaswapV3SwapCallback(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+       overrides?: Overrides
+     ): Promise<BigNumber>;
+ 
+-    "uniswapV3SwapCallback(int256,int256,bytes)"(
++    "bambaswapV3SwapCallback(int256,int256,bytes)"(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+@@ -116,14 +116,14 @@ export class V3SwapRouter extends Contract {
+   };
+ 
+   populateTransaction: {
+-    uniswapV3SwapCallback(
++    bambaswapV3SwapCallback(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+       overrides?: Overrides
+     ): Promise<PopulatedTransaction>;
+ 
+-    "uniswapV3SwapCallback(int256,int256,bytes)"(
++    "bambaswapV3SwapCallback(int256,int256,bytes)"(
+       amount0Delta: BigNumberish,
+       amount1Delta: BigNumberish,
+       data: BytesLike,
+diff --git a/node_modules/@uniswap/universal-router/typechain/factories/Dispatcher__factory.ts b/node_modules/@uniswap/universal-router/typechain/factories/Dispatcher__factory.ts
+index f230d67..b3386c0 100644
+--- a/node_modules/@uniswap/universal-router/typechain/factories/Dispatcher__factory.ts
++++ b/node_modules/@uniswap/universal-router/typechain/factories/Dispatcher__factory.ts
+@@ -295,7 +295,7 @@ const _abi = [
+         type: "bytes",
+       },
+     ],
+-    name: "uniswapV3SwapCallback",
++    name: "bambaswapV3SwapCallback",
+     outputs: [],
+     stateMutability: "nonpayable",
+     type: "function",
+diff --git a/node_modules/@uniswap/universal-router/typechain/factories/IUniswapV3SwapCallback__factory.ts b/node_modules/@uniswap/universal-router/typechain/factories/IUniswapV3SwapCallback__factory.ts
+index 0c41207..52f1623 100644
+--- a/node_modules/@uniswap/universal-router/typechain/factories/IUniswapV3SwapCallback__factory.ts
++++ b/node_modules/@uniswap/universal-router/typechain/factories/IUniswapV3SwapCallback__factory.ts
+@@ -39,7 +39,7 @@ const _abi = [
+         type: "bytes",
+       },
+     ],
+-    name: "uniswapV3SwapCallback",
++    name: "bambaswapV3SwapCallback",
+     outputs: [],
+     stateMutability: "nonpayable",
+     type: "function",
+diff --git a/node_modules/@uniswap/universal-router/typechain/factories/UniversalRouter__factory.ts b/node_modules/@uniswap/universal-router/typechain/factories/UniversalRouter__factory.ts
+index 5b3a6e2..87cfeb3 100644
+--- a/node_modules/@uniswap/universal-router/typechain/factories/UniversalRouter__factory.ts
++++ b/node_modules/@uniswap/universal-router/typechain/factories/UniversalRouter__factory.ts
+@@ -568,7 +568,7 @@ const _abi = [
+         type: "bytes",
+       },
+     ],
+-    name: "uniswapV3SwapCallback",
++    name: "bambaswapV3SwapCallback",
+     outputs: [],
+     stateMutability: "nonpayable",
+     type: "function",
+diff --git a/node_modules/@uniswap/universal-router/typechain/factories/V3SwapRouter__factory.ts b/node_modules/@uniswap/universal-router/typechain/factories/V3SwapRouter__factory.ts
+index 507b2fd..3129505 100644
+--- a/node_modules/@uniswap/universal-router/typechain/factories/V3SwapRouter__factory.ts
++++ b/node_modules/@uniswap/universal-router/typechain/factories/V3SwapRouter__factory.ts
+@@ -95,7 +95,7 @@ const _abi = [
+         type: "bytes",
+       },
+     ],
+-    name: "uniswapV3SwapCallback",
++    name: "bambaswapV3SwapCallback",
+     outputs: [],
+     stateMutability: "nonpayable",
+     type: "function",

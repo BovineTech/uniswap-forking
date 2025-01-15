@@ -1,0 +1,78 @@
+diff --git a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/artifacts/contracts/NonfungiblePositionManager.sol/NonfungiblePositionManager.json b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/artifacts/contracts/NonfungiblePositionManager.sol/NonfungiblePositionManager.json
+index 6b0f1a5..142e7f8 100644
+--- a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/artifacts/contracts/NonfungiblePositionManager.sol/NonfungiblePositionManager.json
++++ b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/artifacts/contracts/NonfungiblePositionManager.sol/NonfungiblePositionManager.json
+@@ -1195,7 +1195,7 @@
+           "type": "bytes"
+         }
+       ],
+-      "name": "uniswapV3MintCallback",
++      "name": "bambaswapV3MintCallback",
+       "outputs": [],
+       "stateMutability": "nonpayable",
+       "type": "function"
+diff --git a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/artifacts/contracts/SwapRouter.sol/SwapRouter.json b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/artifacts/contracts/SwapRouter.sol/SwapRouter.json
+index d7c2857..01a7030 100644
+--- a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/artifacts/contracts/SwapRouter.sol/SwapRouter.json
++++ b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/artifacts/contracts/SwapRouter.sol/SwapRouter.json
+@@ -511,7 +511,7 @@
+           "type": "bytes"
+         }
+       ],
+-      "name": "uniswapV3SwapCallback",
++      "name": "bambaswapV3SwapCallback",
+       "outputs": [],
+       "stateMutability": "nonpayable",
+       "type": "function"
+diff --git a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/artifacts/contracts/interfaces/ISwapRouter.sol/ISwapRouter.json b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/artifacts/contracts/interfaces/ISwapRouter.sol/ISwapRouter.json
+index 15b1ab4..b9681ef 100644
+--- a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/artifacts/contracts/interfaces/ISwapRouter.sol/ISwapRouter.json
++++ b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/artifacts/contracts/interfaces/ISwapRouter.sol/ISwapRouter.json
+@@ -235,7 +235,7 @@
+           "type": "bytes"
+         }
+       ],
+-      "name": "uniswapV3SwapCallback",
++      "name": "bambaswapV3SwapCallback",
+       "outputs": [],
+       "stateMutability": "nonpayable",
+       "type": "function"
+diff --git a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/artifacts/contracts/lens/Quoter.sol/Quoter.json b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/artifacts/contracts/lens/Quoter.sol/Quoter.json
+index 6684a35..5e9dbf6 100644
+--- a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/artifacts/contracts/lens/Quoter.sol/Quoter.json
++++ b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/artifacts/contracts/lens/Quoter.sol/Quoter.json
+@@ -189,7 +189,7 @@
+           "type": "bytes"
+         }
+       ],
+-      "name": "uniswapV3SwapCallback",
++      "name": "bambaswapV3SwapCallback",
+       "outputs": [],
+       "stateMutability": "view",
+       "type": "function"
+diff --git a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/artifacts/contracts/lens/QuoterV2.sol/QuoterV2.json b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/artifacts/contracts/lens/QuoterV2.sol/QuoterV2.json
+index 8b0bd7a..988f1fa 100644
+--- a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/artifacts/contracts/lens/QuoterV2.sol/QuoterV2.json
++++ b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/artifacts/contracts/lens/QuoterV2.sol/QuoterV2.json
+@@ -263,7 +263,7 @@
+           "type": "bytes"
+         }
+       ],
+-      "name": "uniswapV3SwapCallback",
++      "name": "bambaswapV3SwapCallback",
+       "outputs": [],
+       "stateMutability": "view",
+       "type": "function"
+diff --git a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/contracts/base/LiquidityManagement.sol b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/contracts/base/LiquidityManagement.sol
+index 0301b39..61961a6 100644
+--- a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/contracts/base/LiquidityManagement.sol
++++ b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/v3-periphery/contracts/base/LiquidityManagement.sol
+@@ -22,7 +22,7 @@ abstract contract LiquidityManagement is IUniswapV3MintCallback, PeripheryImmuta
+     }
+ 
+     /// @inheritdoc IUniswapV3MintCallback
+-    function uniswapV3MintCallback(
++    function bambaswapV3MintCallback(
+         uint256 amount0Owed,
+         uint256 amount1Owed,
+         bytes calldata data

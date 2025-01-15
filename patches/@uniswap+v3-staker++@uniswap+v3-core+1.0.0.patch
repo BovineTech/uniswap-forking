@@ -1,0 +1,74 @@
+diff --git a/node_modules/@uniswap/v3-staker/node_modules/@uniswap/v3-core/artifacts/contracts/interfaces/callback/IUniswapV3MintCallback.sol/IUniswapV3MintCallback.json b/node_modules/@uniswap/v3-staker/node_modules/@uniswap/v3-core/artifacts/contracts/interfaces/callback/IUniswapV3MintCallback.sol/IUniswapV3MintCallback.json
+index 9221a8c..766f244 100644
+--- a/node_modules/@uniswap/v3-staker/node_modules/@uniswap/v3-core/artifacts/contracts/interfaces/callback/IUniswapV3MintCallback.sol/IUniswapV3MintCallback.json
++++ b/node_modules/@uniswap/v3-staker/node_modules/@uniswap/v3-core/artifacts/contracts/interfaces/callback/IUniswapV3MintCallback.sol/IUniswapV3MintCallback.json
+@@ -21,7 +21,7 @@
+           "type": "bytes"
+         }
+       ],
+-      "name": "uniswapV3MintCallback",
++      "name": "bambaswapV3MintCallback",
+       "outputs": [],
+       "stateMutability": "nonpayable",
+       "type": "function"
+diff --git a/node_modules/@uniswap/v3-staker/node_modules/@uniswap/v3-core/artifacts/contracts/interfaces/callback/IUniswapV3SwapCallback.sol/IUniswapV3SwapCallback.json b/node_modules/@uniswap/v3-staker/node_modules/@uniswap/v3-core/artifacts/contracts/interfaces/callback/IUniswapV3SwapCallback.sol/IUniswapV3SwapCallback.json
+index ada52d6..0147d5e 100644
+--- a/node_modules/@uniswap/v3-staker/node_modules/@uniswap/v3-core/artifacts/contracts/interfaces/callback/IUniswapV3SwapCallback.sol/IUniswapV3SwapCallback.json
++++ b/node_modules/@uniswap/v3-staker/node_modules/@uniswap/v3-core/artifacts/contracts/interfaces/callback/IUniswapV3SwapCallback.sol/IUniswapV3SwapCallback.json
+@@ -21,7 +21,7 @@
+           "type": "bytes"
+         }
+       ],
+-      "name": "uniswapV3SwapCallback",
++      "name": "bambaswapV3SwapCallback",
+       "outputs": [],
+       "stateMutability": "nonpayable",
+       "type": "function"
+diff --git a/node_modules/@uniswap/v3-staker/node_modules/@uniswap/v3-core/contracts/interfaces/callback/IUniswapV3MintCallback.sol b/node_modules/@uniswap/v3-staker/node_modules/@uniswap/v3-core/contracts/interfaces/callback/IUniswapV3MintCallback.sol
+index 85447e8..31294e2 100644
+--- a/node_modules/@uniswap/v3-staker/node_modules/@uniswap/v3-core/contracts/interfaces/callback/IUniswapV3MintCallback.sol
++++ b/node_modules/@uniswap/v3-staker/node_modules/@uniswap/v3-core/contracts/interfaces/callback/IUniswapV3MintCallback.sol
+@@ -10,7 +10,7 @@ interface IUniswapV3MintCallback {
+     /// @param amount0Owed The amount of token0 due to the pool for the minted liquidity
+     /// @param amount1Owed The amount of token1 due to the pool for the minted liquidity
+     /// @param data Any data passed through by the caller via the IUniswapV3PoolActions#mint call
+-    function uniswapV3MintCallback(
++    function bambaswapV3MintCallback(
+         uint256 amount0Owed,
+         uint256 amount1Owed,
+         bytes calldata data
+diff --git a/node_modules/@uniswap/v3-staker/node_modules/@uniswap/v3-core/contracts/interfaces/callback/IUniswapV3SwapCallback.sol b/node_modules/@uniswap/v3-staker/node_modules/@uniswap/v3-core/contracts/interfaces/callback/IUniswapV3SwapCallback.sol
+index 9f183b2..eea88d2 100644
+--- a/node_modules/@uniswap/v3-staker/node_modules/@uniswap/v3-core/contracts/interfaces/callback/IUniswapV3SwapCallback.sol
++++ b/node_modules/@uniswap/v3-staker/node_modules/@uniswap/v3-core/contracts/interfaces/callback/IUniswapV3SwapCallback.sol
+@@ -13,7 +13,7 @@ interface IUniswapV3SwapCallback {
+     /// @param amount1Delta The amount of token1 that was sent (negative) or must be received (positive) by the pool by
+     /// the end of the swap. If positive, the callback must send that amount of token1 to the pool.
+     /// @param data Any data passed through by the caller via the IUniswapV3PoolActions#swap call
+-    function uniswapV3SwapCallback(
++    function bambaswapV3SwapCallback(
+         int256 amount0Delta,
+         int256 amount1Delta,
+         bytes calldata data
+diff --git a/node_modules/@uniswap/v3-staker/node_modules/@uniswap/v3-core/contracts/interfaces/pool/IUniswapV3PoolActions.sol b/node_modules/@uniswap/v3-staker/node_modules/@uniswap/v3-core/contracts/interfaces/pool/IUniswapV3PoolActions.sol
+index 44fb61c..0cc7c8e 100644
+--- a/node_modules/@uniswap/v3-staker/node_modules/@uniswap/v3-core/contracts/interfaces/pool/IUniswapV3PoolActions.sol
++++ b/node_modules/@uniswap/v3-staker/node_modules/@uniswap/v3-core/contracts/interfaces/pool/IUniswapV3PoolActions.sol
+@@ -10,7 +10,7 @@ interface IUniswapV3PoolActions {
+     function initialize(uint160 sqrtPriceX96) external;
+ 
+     /// @notice Adds liquidity for the given recipient/tickLower/tickUpper position
+-    /// @dev The caller of this method receives a callback in the form of IUniswapV3MintCallback#uniswapV3MintCallback
++    /// @dev The caller of this method receives a callback in the form of IUniswapV3MintCallback#bambaswapV3MintCallback
+     /// in which they must pay any token0 or token1 owed for the liquidity. The amount of token0/token1 due depends
+     /// on tickLower, tickUpper, the amount of liquidity, and the current price.
+     /// @param recipient The address for which the liquidity will be created
+@@ -63,7 +63,7 @@ interface IUniswapV3PoolActions {
+     ) external returns (uint256 amount0, uint256 amount1);
+ 
+     /// @notice Swap token0 for token1, or token1 for token0
+-    /// @dev The caller of this method receives a callback in the form of IUniswapV3SwapCallback#uniswapV3SwapCallback
++    /// @dev The caller of this method receives a callback in the form of IUniswapV3SwapCallback#bambaswapV3SwapCallback
+     /// @param recipient The address to receive the output of the swap
+     /// @param zeroForOne The direction of the swap, true for token0 to token1, false for token1 to token0
+     /// @param amountSpecified The amount of the swap, which implicitly configures the swap as exact input (positive), or exact output (negative)

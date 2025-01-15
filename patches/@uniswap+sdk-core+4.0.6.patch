@@ -1,0 +1,136 @@
+diff --git a/node_modules/@uniswap/sdk-core/dist/chains.d.ts b/node_modules/@uniswap/sdk-core/dist/chains.d.ts
+index 88abdbf..b941362 100644
+--- a/node_modules/@uniswap/sdk-core/dist/chains.d.ts
++++ b/node_modules/@uniswap/sdk-core/dist/chains.d.ts
+@@ -1,5 +1,6 @@
+ export declare enum ChainId {
+     MAINNET = 1,
++    LINEA = 59144,
+     GOERLI = 5,
+     SEPOLIA = 11155111,
+     OPTIMISM = 10,
+@@ -17,7 +18,7 @@ export declare enum ChainId {
+     BASE_GOERLI = 84531,
+     BASE = 8453
+ }
+-export declare const SUPPORTED_CHAINS: readonly [ChainId.MAINNET, ChainId.OPTIMISM, ChainId.OPTIMISM_GOERLI, ChainId.ARBITRUM_ONE, ChainId.ARBITRUM_GOERLI, ChainId.POLYGON, ChainId.POLYGON_MUMBAI, ChainId.GOERLI, ChainId.SEPOLIA, ChainId.CELO_ALFAJORES, ChainId.CELO, ChainId.BNB, ChainId.AVALANCHE, ChainId.BASE, ChainId.BASE_GOERLI];
++export declare const SUPPORTED_CHAINS: readonly [ChainId.MAINNET, ChainId.LINEA, ChainId.OPTIMISM, ChainId.OPTIMISM_GOERLI, ChainId.ARBITRUM_ONE, ChainId.ARBITRUM_GOERLI, ChainId.POLYGON, ChainId.POLYGON_MUMBAI, ChainId.GOERLI, ChainId.SEPOLIA, ChainId.CELO_ALFAJORES, ChainId.CELO, ChainId.BNB, ChainId.AVALANCHE, ChainId.BASE, ChainId.BASE_GOERLI];
+ export declare type SupportedChainsType = typeof SUPPORTED_CHAINS[number];
+ export declare enum NativeCurrencyName {
+     ETHER = "ETH",
+diff --git a/node_modules/@uniswap/sdk-core/dist/index.js b/node_modules/@uniswap/sdk-core/dist/index.js
+index c3473ea..bb9d6f4 100644
+--- a/node_modules/@uniswap/sdk-core/dist/index.js
++++ b/node_modules/@uniswap/sdk-core/dist/index.js
+@@ -1,6 +1,5 @@
+ 
+ 'use strict'
+-
+ if (process.env.NODE_ENV === 'production') {
+   module.exports = require('./sdk-core.cjs.production.min.js')
+ } else {
+diff --git a/node_modules/@uniswap/sdk-core/dist/sdk-core.cjs.development.js b/node_modules/@uniswap/sdk-core/dist/sdk-core.cjs.development.js
+index fcb2070..f752a1a 100644
+--- a/node_modules/@uniswap/sdk-core/dist/sdk-core.cjs.development.js
++++ b/node_modules/@uniswap/sdk-core/dist/sdk-core.cjs.development.js
+@@ -1,5 +1,4 @@
+ 'use strict';
+-
+ Object.defineProperty(exports, '__esModule', { value: true });
+ 
+ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+@@ -53,6 +52,7 @@ function _inheritsLoose(subClass, superClass) {
+ 
+ (function (ChainId) {
+   ChainId[ChainId["MAINNET"] = 1] = "MAINNET";
++  ChainId[ChainId["LINEA"] = 59144] = "LINEA";
+   ChainId[ChainId["GOERLI"] = 5] = "GOERLI";
+   ChainId[ChainId["SEPOLIA"] = 11155111] = "SEPOLIA";
+   ChainId[ChainId["OPTIMISM"] = 10] = "OPTIMISM";
+@@ -71,8 +71,7 @@ function _inheritsLoose(subClass, superClass) {
+   ChainId[ChainId["BASE"] = 8453] = "BASE";
+ })(exports.ChainId || (exports.ChainId = {}));
+ 
+-var SUPPORTED_CHAINS = [exports.ChainId.MAINNET, exports.ChainId.OPTIMISM, exports.ChainId.OPTIMISM_GOERLI, exports.ChainId.ARBITRUM_ONE, exports.ChainId.ARBITRUM_GOERLI, exports.ChainId.POLYGON, exports.ChainId.POLYGON_MUMBAI, exports.ChainId.GOERLI, exports.ChainId.SEPOLIA, exports.ChainId.CELO_ALFAJORES, exports.ChainId.CELO, exports.ChainId.BNB, exports.ChainId.AVALANCHE, exports.ChainId.BASE, exports.ChainId.BASE_GOERLI];
+-
++var SUPPORTED_CHAINS = [exports.ChainId.MAINNET, exports.ChainId.LINEA, exports.ChainId.OPTIMISM, exports.ChainId.OPTIMISM_GOERLI, exports.ChainId.ARBITRUM_ONE, exports.ChainId.ARBITRUM_GOERLI, exports.ChainId.POLYGON, exports.ChainId.POLYGON_MUMBAI, exports.ChainId.GOERLI, exports.ChainId.SEPOLIA, exports.ChainId.CELO_ALFAJORES, exports.ChainId.CELO, exports.ChainId.BNB, exports.ChainId.AVALANCHE, exports.ChainId.BASE, exports.ChainId.BASE_GOERLI];
+ (function (NativeCurrencyName) {
+   // Strings match input for CLI
+   NativeCurrencyName["ETHER"] = "ETH";
+diff --git a/node_modules/@uniswap/sdk-core/dist/sdk-core.esm.js b/node_modules/@uniswap/sdk-core/dist/sdk-core.esm.js
+index f194186..61a3cfe 100644
+--- a/node_modules/@uniswap/sdk-core/dist/sdk-core.esm.js
++++ b/node_modules/@uniswap/sdk-core/dist/sdk-core.esm.js
+@@ -4,7 +4,6 @@ import _Decimal from 'decimal.js-light';
+ import _Big from 'big.js';
+ import toFormat from 'toformat';
+ import { getAddress } from '@ethersproject/address';
+-
+ function _defineProperties(target, props) {
+   for (var i = 0; i < props.length; i++) {
+     var descriptor = props[i];
+@@ -49,6 +48,7 @@ var ChainId;
+ 
+ (function (ChainId) {
+   ChainId[ChainId["MAINNET"] = 1] = "MAINNET";
++  ChainId[ChainId["LINEA"] = 59144] = "LINEA";
+   ChainId[ChainId["GOERLI"] = 5] = "GOERLI";
+   ChainId[ChainId["SEPOLIA"] = 11155111] = "SEPOLIA";
+   ChainId[ChainId["OPTIMISM"] = 10] = "OPTIMISM";
+@@ -67,7 +67,7 @@ var ChainId;
+   ChainId[ChainId["BASE"] = 8453] = "BASE";
+ })(ChainId || (ChainId = {}));
+ 
+-var SUPPORTED_CHAINS = [ChainId.MAINNET, ChainId.OPTIMISM, ChainId.OPTIMISM_GOERLI, ChainId.ARBITRUM_ONE, ChainId.ARBITRUM_GOERLI, ChainId.POLYGON, ChainId.POLYGON_MUMBAI, ChainId.GOERLI, ChainId.SEPOLIA, ChainId.CELO_ALFAJORES, ChainId.CELO, ChainId.BNB, ChainId.AVALANCHE, ChainId.BASE, ChainId.BASE_GOERLI];
++var SUPPORTED_CHAINS = [ChainId.MAINNET, ChainId.LINEA, ChainId.OPTIMISM, ChainId.OPTIMISM_GOERLI, ChainId.ARBITRUM_ONE, ChainId.ARBITRUM_GOERLI, ChainId.POLYGON, ChainId.POLYGON_MUMBAI, ChainId.GOERLI, ChainId.SEPOLIA, ChainId.CELO_ALFAJORES, ChainId.CELO, ChainId.BNB, ChainId.AVALANCHE, ChainId.BASE, ChainId.BASE_GOERLI];
+ var NativeCurrencyName;
+ 
+ (function (NativeCurrencyName) {
+@@ -114,6 +114,14 @@ var MAINNET_ADDRESSES = /*#__PURE__*/_extends({}, DEFAULT_ADDRESSES, {
+   v1MixedRouteQuoterAddress: '0x84E44095eeBfEC7793Cd7d5b57B7e401D7f1cA2E'
+ });
+ 
++var LINEA_ADDRESSES = /*#__PURE__*/_extends({}, DEFAULT_ADDRESSES, {
++  v3CoreFactoryAddress: '0x1d6fC1c216B4501154FA0a0eD1053c56423df5e6',
++  multicallAddress: '0x44Eac61064DB3aF2AEAC9fD47b2Cb4d0261c0F31',
++  quoterAddress: '0x6BB316Fb1a534d4a263A4D2d73d4faB6da9960BA',
++  nonfungiblePositionManagerAddress: '0x644e684ca102CA52aAeCf657877eC5203F522e4B',
++  tickLensAddress: '0xf48421D0b4937Ea6085d7360F9e4991A9d23D85A'
++});
++
+ var GOERLI_ADDRESSES = /*#__PURE__*/_extends({}, DEFAULT_ADDRESSES, {
+   v1MixedRouteQuoterAddress: '0xBa60b6e6fF25488308789E6e0A65D838be34194e'
+ });
+@@ -125,7 +133,13 @@ var ARBITRUM_ONE_ADDRESSES = /*#__PURE__*/_extends({}, DEFAULT_ADDRESSES, {
+   tickLensAddress: '0xbfd8137f7d1516D3ea5cA83523914859ec47F573'
+ });
+ 
+-var POLYGON_ADDRESSES = DEFAULT_ADDRESSES; // celo v3 addresses
++var POLYGON_ADDRESSES = {
++  v3CoreFactoryAddress: '0xD7D6D348Ecf0a9016457B73Da41e37C915aC954a',
++  multicallAddress: '0x1F98415757620B543A52E61c46B32eB19261F984',
++  quoterAddress: '0x6f1CC4cC47DCF18285d6045147061c8d6c4C2Ed9',
++  nonfungiblePositionManagerAddress: '0xD6e76A2A4A21DaF4718Ccc76b23a5DBE1042b9FE',
++  tickLensAddress: '0xf48421D0b4937Ea6085d7360F9e4991A9d23D85A'
++};
+ 
+ var CELO_ADDRESSES = {
+   v3CoreFactoryAddress: '0xAfE208a311B21f13EF87E33A90049fC17A7acDEc',
+@@ -201,7 +215,7 @@ var BASE_GOERLI_ADDRESSES = {
+   tickLensAddress: '0x1acB873Ee909D0c98adB18e4474943249F931b92',
+   swapRouter02Address: '0x8357227D4eDc78991Db6FDB9bD6ADE250536dE1d'
+ };
+-var CHAIN_TO_ADDRESSES_MAP = (_CHAIN_TO_ADDRESSES_M = {}, _CHAIN_TO_ADDRESSES_M[ChainId.MAINNET] = MAINNET_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.OPTIMISM] = OPTIMISM_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.ARBITRUM_ONE] = ARBITRUM_ONE_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.POLYGON] = POLYGON_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.POLYGON_MUMBAI] = POLYGON_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.GOERLI] = GOERLI_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.CELO] = CELO_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.CELO_ALFAJORES] = CELO_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.BNB] = BNB_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.OPTIMISM_GOERLI] = OPTIMISM_GOERLI_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.ARBITRUM_GOERLI] = ARBITRUM_GOERLI_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.SEPOLIA] = SEPOLIA_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.AVALANCHE] = AVALANCHE_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.BASE] = BASE_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.BASE_GOERLI] = BASE_GOERLI_ADDRESSES, _CHAIN_TO_ADDRESSES_M);
++var CHAIN_TO_ADDRESSES_MAP = (_CHAIN_TO_ADDRESSES_M = {}, _CHAIN_TO_ADDRESSES_M[ChainId.MAINNET] = MAINNET_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.LINEA] = LINEA_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.OPTIMISM] = OPTIMISM_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.ARBITRUM_ONE] = ARBITRUM_ONE_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.POLYGON] = POLYGON_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.POLYGON_MUMBAI] = POLYGON_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.GOERLI] = GOERLI_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.CELO] = CELO_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.CELO_ALFAJORES] = CELO_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.BNB] = BNB_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.OPTIMISM_GOERLI] = OPTIMISM_GOERLI_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.ARBITRUM_GOERLI] = ARBITRUM_GOERLI_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.SEPOLIA] = SEPOLIA_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.AVALANCHE] = AVALANCHE_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.BASE] = BASE_ADDRESSES, _CHAIN_TO_ADDRESSES_M[ChainId.BASE_GOERLI] = BASE_GOERLI_ADDRESSES, _CHAIN_TO_ADDRESSES_M);
+ /* V3 Contract Addresses */
+ 
+ var V3_CORE_FACTORY_ADDRESSES = /*#__PURE__*/_extends({}, /*#__PURE__*/SUPPORTED_CHAINS.reduce(function (memo, chainId) {
+@@ -854,7 +868,7 @@ var _WETH;
+  * Known WETH9 implementation addresses, used in our implementation of Ether#wrapped
+  */
+ 
+-var WETH9 = (_WETH = {}, _WETH[1] = /*#__PURE__*/new Token(1, '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', 18, 'WETH', 'Wrapped Ether'), _WETH[3] = /*#__PURE__*/new Token(3, '0xc778417E063141139Fce010982780140Aa0cD5Ab', 18, 'WETH', 'Wrapped Ether'), _WETH[4] = /*#__PURE__*/new Token(4, '0xc778417E063141139Fce010982780140Aa0cD5Ab', 18, 'WETH', 'Wrapped Ether'), _WETH[5] = /*#__PURE__*/new Token(5, '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6', 18, 'WETH', 'Wrapped Ether'), _WETH[42] = /*#__PURE__*/new Token(42, '0xd0A1E359811322d97991E03f863a0C30C2cF029C', 18, 'WETH', 'Wrapped Ether'), _WETH[10] = /*#__PURE__*/new Token(10, '0x4200000000000000000000000000000000000006', 18, 'WETH', 'Wrapped Ether'), _WETH[69] = /*#__PURE__*/new Token(69, '0x4200000000000000000000000000000000000006', 18, 'WETH', 'Wrapped Ether'), _WETH[42161] = /*#__PURE__*/new Token(42161, '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', 18, 'WETH', 'Wrapped Ether'), _WETH[421611] = /*#__PURE__*/new Token(421611, '0xB47e6A5f8b33b3F17603C83a0535A9dcD7E32681', 18, 'WETH', 'Wrapped Ether'), _WETH);
++var WETH9 = (_WETH = {}, _WETH[1] = /*#__PURE__*/new Token(1, '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', 18, 'WETH', 'Wrapped Ether'), _WETH[59144] = /*#__PURE__*/new Token(59144, '0xe5D7C2a44FfDDf6b295A15c148167daaAf5Cf34f', 18, 'WETH', 'Wrapped Ether'), _WETH[3] = /*#__PURE__*/new Token(3, '0xc778417E063141139Fce010982780140Aa0cD5Ab', 18, 'WETH', 'Wrapped Ether'), _WETH[4] = /*#__PURE__*/new Token(4, '0xc778417E063141139Fce010982780140Aa0cD5Ab', 18, 'WETH', 'Wrapped Ether'), _WETH[5] = /*#__PURE__*/new Token(5, '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6', 18, 'WETH', 'Wrapped Ether'), _WETH[42] = /*#__PURE__*/new Token(42, '0xd0A1E359811322d97991E03f863a0C30C2cF029C', 18, 'WETH', 'Wrapped Ether'), _WETH[10] = /*#__PURE__*/new Token(10, '0x4200000000000000000000000000000000000006', 18, 'WETH', 'Wrapped Ether'), _WETH[69] = /*#__PURE__*/new Token(69, '0x4200000000000000000000000000000000000006', 18, 'WETH', 'Wrapped Ether'), _WETH[42161] = /*#__PURE__*/new Token(42161, '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', 18, 'WETH', 'Wrapped Ether'), _WETH[421611] = /*#__PURE__*/new Token(421611, '0xB47e6A5f8b33b3F17603C83a0535A9dcD7E32681', 18, 'WETH', 'Wrapped Ether'), _WETH);
+ 
+ /**
+  * Ether is the main usage of a 'native' currency, i.e. for Ethereum mainnet and all testnets

@@ -1,0 +1,78 @@
+diff --git a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/SwapRouter02.sol/SwapRouter02.json b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/SwapRouter02.sol/SwapRouter02.json
+index 9fe8a2e..e8b27c1 100644
+--- a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/SwapRouter02.sol/SwapRouter02.json
++++ b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/SwapRouter02.sol/SwapRouter02.json
+@@ -960,7 +960,7 @@
+           "type": "bytes"
+         }
+       ],
+-      "name": "uniswapV3SwapCallback",
++      "name": "bambaswapV3SwapCallback",
+       "outputs": [],
+       "stateMutability": "nonpayable",
+       "type": "function"
+diff --git a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/V3SwapRouter.sol/V3SwapRouter.json b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/V3SwapRouter.sol/V3SwapRouter.json
+index 8826caf..dc3866f 100644
+--- a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/V3SwapRouter.sol/V3SwapRouter.json
++++ b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/V3SwapRouter.sol/V3SwapRouter.json
+@@ -419,7 +419,7 @@
+           "type": "bytes"
+         }
+       ],
+-      "name": "uniswapV3SwapCallback",
++      "name": "bambaswapV3SwapCallback",
+       "outputs": [],
+       "stateMutability": "nonpayable",
+       "type": "function"
+diff --git a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/interfaces/ISwapRouter02.sol/ISwapRouter02.json b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/interfaces/ISwapRouter02.sol/ISwapRouter02.json
+index 3c0d46e..d11f735 100644
+--- a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/interfaces/ISwapRouter02.sol/ISwapRouter02.json
++++ b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/interfaces/ISwapRouter02.sol/ISwapRouter02.json
+@@ -704,7 +704,7 @@
+           "type": "bytes"
+         }
+       ],
+-      "name": "uniswapV3SwapCallback",
++      "name": "bambaswapV3SwapCallback",
+       "outputs": [],
+       "stateMutability": "nonpayable",
+       "type": "function"
+diff --git a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/interfaces/IV3SwapRouter.sol/IV3SwapRouter.json b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/interfaces/IV3SwapRouter.sol/IV3SwapRouter.json
+index a3d394f..7bebdf4 100644
+--- a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/interfaces/IV3SwapRouter.sol/IV3SwapRouter.json
++++ b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/interfaces/IV3SwapRouter.sol/IV3SwapRouter.json
+@@ -215,7 +215,7 @@
+           "type": "bytes"
+         }
+       ],
+-      "name": "uniswapV3SwapCallback",
++      "name": "bambaswapV3SwapCallback",
+       "outputs": [],
+       "stateMutability": "nonpayable",
+       "type": "function"
+diff --git a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/lens/Quoter.sol/Quoter.json b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/lens/Quoter.sol/Quoter.json
+index 6684a35..5e9dbf6 100644
+--- a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/lens/Quoter.sol/Quoter.json
++++ b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/lens/Quoter.sol/Quoter.json
+@@ -189,7 +189,7 @@
+           "type": "bytes"
+         }
+       ],
+-      "name": "uniswapV3SwapCallback",
++      "name": "bambaswapV3SwapCallback",
+       "outputs": [],
+       "stateMutability": "view",
+       "type": "function"
+diff --git a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/lens/QuoterV2.sol/QuoterV2.json b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/lens/QuoterV2.sol/QuoterV2.json
+index 8b0bd7a..988f1fa 100644
+--- a/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/lens/QuoterV2.sol/QuoterV2.json
++++ b/node_modules/@uniswap/router-sdk/node_modules/@uniswap/swap-router-contracts/artifacts/contracts/lens/QuoterV2.sol/QuoterV2.json
+@@ -263,7 +263,7 @@
+           "type": "bytes"
+         }
+       ],
+-      "name": "uniswapV3SwapCallback",
++      "name": "bambaswapV3SwapCallback",
+       "outputs": [],
+       "stateMutability": "view",
+       "type": "function"

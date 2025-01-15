@@ -1,0 +1,31 @@
+name: build-and-deploy-sawaswap-front
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.16
+    
+    - run: yarn
+
+    - run: npx update-browserslist-db@latest
+
+    - run: yarn build
+      env :
+        CI: false
+
+    - name: Sync project
+      env :
+        RSYNC_PASSWORD : YE#bntJ~I|P8
+      run: |
+        rsync -rult --delete-after ./ rsync_bambaswap_front@109.71.246.111::bambaswap_front
