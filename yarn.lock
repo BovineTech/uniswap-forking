@@ -5856,6 +5856,11 @@
   resolved "https://registry.yarnpkg.com/@uniswap/default-token-list/-/default-token-list-11.2.0.tgz#f7babd37b8f2f1d5c724bd4689be93c4aedd9205"
   integrity sha512-royMoeeONKRheGEQD7eeLKdwWvdl6l4qzpFr5Jh9Mp09xdQoBaF7zqZuM/5URIXV0cvvWGWnbIqVKbtFikkMRA==
 
+"@uniswap/default-token-list@^13.15.0":
+  version "13.15.0"
+  resolved "https://registry.yarnpkg.com/@uniswap/default-token-list/-/default-token-list-13.15.0.tgz#4add9dd40cb6708ae6fa7aa08a9dce86bdea0c7c"
+  integrity sha512-rD6frFgcEPne6QviouO4FrC2wwqYc8W4nJerZpJnn/yBJx/A0h15Wbb4LW3uS362I6ci4cBLM+byzKHT7CjSIg==
+
 "@uniswap/eslint-config@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@uniswap/eslint-config/-/eslint-config-1.2.0.tgz#1d9565c5ae5982fc0e3585b272e15b89b64b2db0"
